@@ -31,6 +31,7 @@
     "zod": "3.23.3"
   },
   "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
     "@types/eslint": "^8.56.10",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.79",
@@ -40,10 +41,13 @@
     "drizzle-kit": "^0.20.17",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.2",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-drizzle": "^0.2.3",
+    "eslint-plugin-prettier": "^5.1.3",
     "postcss": "^8.4.38",
     "postcss-preset-mantine": "^1.14.4",
     "postcss-simple-vars": "^7.0.1",
+    "prettier": "^3.2.5",
     "typescript": "^5.4.5"
   },
   "ct3aMetadata": {
