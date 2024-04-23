@@ -27,6 +27,7 @@ export const posts = sqliteTable(
   }),
 );
 
+// #region NEXT-AUTH
 export const users = sqliteTable("user", {
   id: text("id", { length: 255 }).notNull().primaryKey(),
   name: text("name", { length: 255 }),
@@ -101,3 +102,4 @@ export const verificationTokens = sqliteTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   }),
 );
+// #endregion NEXT-AUTH
