@@ -36,7 +36,7 @@
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
     "drizzle-kit": "^0.20.17",
-    "eslint": "^9.1.1",
+    "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.2",
     "eslint-plugin-drizzle": "^0.2.3",
     "typescript": "^5.4.5"
