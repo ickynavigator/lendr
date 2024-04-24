@@ -7,9 +7,11 @@
     "build": "next build",
     "db:push": "drizzle-kit push:sqlite",
     "db:studio": "drizzle-kit studio",
-    "dev": "next dev",
+    "db:dev": "turso dev --db-file .local.db --port 5123",
+    "next:dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "dev": "concurrently --kill-others npm:*:dev"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.0.0",
@@ -38,6 +40,7 @@
     "@types/react-dom": "^18.2.25",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
+    "concurrently": "^8.2.2",
     "drizzle-kit": "^0.20.17",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.2",
@@ -48,6 +51,7 @@
     "postcss-preset-mantine": "^1.14.4",
     "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.2.5",
+    "turso": "^0.1.0",
     "typescript": "^5.4.5"
   },
   "ct3aMetadata": {
