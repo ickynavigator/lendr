@@ -23,7 +23,7 @@ export default async function Page() {
   const session = await auth();
 
   if (session) {
-    return redirect("/dashboard");
+    return redirect("/");
   }
 
   return (
