@@ -4,13 +4,9 @@ import "@mantine/core/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Inter } from "next/font/google";
 
+import theme from "~/theme";
 import { TRPCReactProvider } from "~/trpc/react";
-
-const inter = Inter({
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Create T3 App",
@@ -18,19 +14,19 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <head>
         <ColorSchemeScript />
       </head>
 
-      <body className={inter.className}>
-        <MantineProvider>
+      <body>
+        <MantineProvider theme={theme}>
           <TRPCReactProvider>{children}</TRPCReactProvider>
         </MantineProvider>
 
