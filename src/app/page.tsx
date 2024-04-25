@@ -1,85 +1,105 @@
+import {
+  Box,
+  Button,
+  Center,
+  Container,
+  Group,
+  Image,
+  List,
+  ListItem,
+  rem,
+  Text,
+  ThemeIcon,
+  Title,
+} from "@mantine/core";
+import { IconCheck, IconHourglass } from "@tabler/icons-react";
 import Link from "next/link";
 
-import { CreatePost } from "~/app/_components/create-post";
-import { auth } from "~/server/auth";
-import { api } from "~/trpc/server";
-import styles from "./index.module.css";
+import ColorSchemeToggle from "~/app/_components/colorSchemeToggle";
+import classes from "~/app/page.module.css";
 
-export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
-  const session = await auth();
+const iconProps = {
+  style: { width: rem(15), height: rem(15) },
+  stroke: 2,
+};
 
+function CheckIcon() {
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <h1 className={styles.title}>
-          Create <span className={styles.pinkSpan}>T3</span> App
-        </h1>
-        <div className={styles.cardRow}>
-          <Link
-            className={styles.card}
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className={styles.cardTitle}>First Steps →</h3>
-            <div className={styles.cardText}>
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className={styles.card}
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className={styles.cardTitle}>Documentation →</h3>
-            <div className={styles.cardText}>
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
-        </div>
-        <div className={styles.showcaseContainer}>
-          <p className={styles.showcaseText}>
-            {hello ? hello.greeting : "Loading tRPC query..."}
-          </p>
-
-          <div className={styles.authContainer}>
-            <p className={styles.showcaseText}>
-              {session && <span>Logged in as {session.user?.name}</span>}
-            </p>
-            <Link
-              href={session ? "/api/auth/signout" : "/api/auth/signin"}
-              className={styles.loginButton}
-            >
-              {session ? "Sign out" : "Sign in"}
-            </Link>
-          </div>
-        </div>
-
-        <CrudShowcase />
-      </div>
-    </main>
+    <ThemeIcon size="sm" radius="xl" color="green">
+      <IconHourglass {...iconProps} />
+    </ThemeIcon>
   );
 }
 
-async function CrudShowcase() {
-  const session = await auth();
-  if (!session?.user) return null;
-
-  const latestPost = await api.post.getLatest();
-
+function OngoingIcon() {
   return (
-    <div className={styles.showcaseContainer}>
-      {latestPost ? (
-        <p className={styles.showcaseText}>
-          Your most recent post: {latestPost.name}
-        </p>
-      ) : (
-        <p className={styles.showcaseText}>You have no posts yet.</p>
-      )}
+    <ThemeIcon size="sm" radius="xl" color="yellow">
+      <IconCheck {...iconProps} />
+    </ThemeIcon>
+  );
+}
 
-      <CreatePost />
-    </div>
+export default function Page() {
+  return (
+    <Center h="100%">
+      <Container size="md">
+        <Group>
+          <Box maw={rem(480)}>
+            <Title className={classes.title} fw={900} lh={1.2}>
+              A <span className={classes.highlight}>modern</span> finance
+              tracker
+            </Title>
+
+            <Text c="dimmed" mt="md">
+              Tracks debtors. Built with Next.js and Mantine.
+            </Text>
+
+            <List mt={30} spacing="sm" size="sm" icon={<CheckIcon />}>
+              <ListItem>
+                <b>Debt Tracker</b> - create, edit, delete, and close debts
+              </ListItem>
+
+              <ListItem icon={<OngoingIcon />}>
+                <b>Item Tracker</b> - store items you lent out or borrowed
+              </ListItem>
+            </List>
+
+            <Group mt={30}>
+              <Button
+                component={Link}
+                href="/login"
+                radius="xl"
+                size="md"
+                className={classes.control}
+              >
+                Get started
+              </Button>
+
+              <Button
+                component={Link}
+                href="https://github.com/ickynavigator/lendr"
+                target="_blank"
+                variant="default"
+                radius="xl"
+                size="md"
+                className={classes.control}
+              >
+                Source code
+              </Button>
+
+              <ColorSchemeToggle />
+            </Group>
+          </Box>
+
+          <Image
+            src="/header-1.svg"
+            className={classes.image}
+            alt="Header 1"
+            w={rem(376)}
+            h={rem(356)}
+          />
+        </Group>
+      </Container>
+    </Center>
   );
 }
